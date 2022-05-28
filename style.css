@@ -1,0 +1,53 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  font-family: monospace;
+}
+body {
+  margin: 0;
+}
+header {
+  background-color: rgb(249, 206, 212);
+
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header > * {
+  margin: 0.5rem;
+}
+
+button {
+  background-color: aqua;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 3px 3px 2px purple;
+  cursor: pointer;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#delete-dones {
+  margin: 2rem;
+}
+
+ul {
+  list-style: none;
+  font-size: 1.2rem;
+  padding: 0;
+}
+
+ul > * {
+  margin: 1rem;
+}
