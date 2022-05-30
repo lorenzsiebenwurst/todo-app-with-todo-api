@@ -21,6 +21,7 @@ function renderTodos() {
     const newLi = document.createElement("li");
     const text = document.createTextNode(todo.description);
     const checkbox = document.createElement("input");
+    checkbox.setAttribute("done-id", todo.id);
     checkbox.type = "checkbox";
     checkbox.checked = todo.done;
     newLi.appendChild(checkbox);
@@ -54,7 +55,6 @@ addTodoBtn.addEventListener("click", () => {
 deleteBtn.addEventListener("click", () => {
   todos.forEach((todo) => {
     if (todo.done) {
-      console.log("Test");
       let idDone = todo.id;
       fetch("http://localhost:4730/todos/" + idDone, {
         method: "DELETE",
@@ -64,5 +64,23 @@ deleteBtn.addEventListener("click", () => {
     }
   });
   renderTodos();
-  console.log(todos);
+});
+
+list.addEventListener("change", (e) => {
+  let doneId = e.target.getAttribute("done-id");
+
+  let doneDescription = todos.find((todo) => (todo.id = doneId)).description;
+
+  let newTodo = {
+    id: doneId,
+    description: doneDescription,
+    done: e.target.checked,
+  };
+  fetch("http://localhost:4730/todos/" + doneId, {
+    method: "PUT",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify(newTodo),
+  })
+    .then((res) => res.json())
+    .then();
 });
