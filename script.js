@@ -69,9 +69,9 @@ deleteBtn.addEventListener("click", () => {
 list.addEventListener("change", (e) => {
   let doneId = e.target.getAttribute("done-id");
 
-  let doneDescription = todos.find((todo) => (todo.id = doneId)).description;
+  let doneDescription = todos.find((todo) => todo.id == doneId).description;
 
-  let newTodo = {
+  let putTodo = {
     id: doneId,
     description: doneDescription,
     done: e.target.checked,
@@ -79,8 +79,6 @@ list.addEventListener("change", (e) => {
   fetch("http://localhost:4730/todos/" + doneId, {
     method: "PUT",
     headers: { "Content-type": "application/json" },
-    body: JSON.stringify(newTodo),
-  })
-    .then((res) => res.json())
-    .then();
+    body: JSON.stringify(putTodo),
+  }).then(() => loadTodos());
 });
